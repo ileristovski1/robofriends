@@ -4,7 +4,7 @@ import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import './App.css';
-import { setSearchField } from '../actions';
+import { setSearchField, requestRobots } from '../actions';
 
 
 
@@ -12,14 +12,18 @@ import { setSearchField } from '../actions';
 //Tell me what piece of state I need to listen to
 const mapStateToProps = state => {
     return {
-        searchField: state.searchField
+        searchField: state.searchRobots.searchField,
+        robots: state.requestRobots.robots,
+        isPending: state.requestRobots.isPending,
+        error: state.requestRobots.error
     }
 }
 
 //Tell me what props I should listen to that are actions
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+        onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onRequestRobots: () => requestRobots(dispatch)
     }
 }
 
